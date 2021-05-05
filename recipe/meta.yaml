@@ -23,6 +23,7 @@ requirements:
   run:
     - python
     - setuptools
+    - libffi
 
 test:
   imports:
