@@ -20,15 +20,20 @@ requirements:
   host:
     - python
     - pip
+    - wheel
+    - setuptools
   run:
     - python
-    - setuptools
     - libffi
 
 test:
   imports:
     - PyObjCTools
     - objc
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/ronaldoussoren/pyobjc
@@ -37,6 +42,7 @@ about:
   license_family: MIT
   license_file: License.txt
   dev_url: https://github.com/ronaldoussoren/pyobjc/tree/master/pyobjc-core
+  doc_url: https://github.com/ronaldoussoren/pyobjc/blob/master/pyobjc-core/README.txt
 
 extra:
   recipe-maintainers:
