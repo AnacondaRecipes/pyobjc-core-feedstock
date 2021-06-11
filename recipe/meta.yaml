@@ -36,6 +36,7 @@ about:
   summary: 'Python<->ObjC Interoperability Module'
   license_family: MIT
   license_file: License.txt
+  dev_url: https://github.com/ronaldoussoren/pyobjc/tree/master/pyobjc-core
 
 extra:
   recipe-maintainers:
