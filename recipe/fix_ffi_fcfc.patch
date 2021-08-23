@@ -1,0 +1,12 @@
+Index: work_moved_pyobjc-core-7.3-py39he61b857_0_osx-arm64/Modules/objc/libffi_support.m
+===================================================================
+--- work_moved_pyobjc-core-7.3-py39he61b857_0_osx-arm64.orig/Modules/objc/libffi_support.m
++++ work_moved_pyobjc-core-7.3-py39he61b857_0_osx-arm64/Modules/objc/libffi_support.m
+@@ -13,6 +13,7 @@
+  * FIXME: There's way to much duplicated code in here, please refactor me.
+  */
+ #include "pyobjc.h"
++#include <ffi.h>
+ 
+ #import <CoreFoundation/CoreFoundation.h>
+ #import <Foundation/NSHost.h>
