@@ -14,7 +14,7 @@ source:
     - fix_ffi_fcfc.patch  # [osx and arm64]
 
 build:
-  number: 0
+  number: 1
   skip: true  # # [not osx or py2k or (arm64 and py < 38)]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -30,7 +30,7 @@ requirements:
     - libffi
   run:
     - python
-    - libffi
+    - libffi >={{ libffi }}
     - setuptools
 
 test:
