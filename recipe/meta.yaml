@@ -36,7 +36,7 @@ requirements:
     - libffi
   run:
     - python
-    - libffi >={{ libffi }}
+    - libffi
 
 test:
   imports:
