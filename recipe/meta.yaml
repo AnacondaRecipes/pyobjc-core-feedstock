@@ -37,7 +37,6 @@ requirements:
   run:
     - python
     - libffi >={{ libffi }}
-    - setuptools
 
 test:
   imports:
