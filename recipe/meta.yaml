@@ -1,6 +1,6 @@
 {% set name = "pyobjc-core" %}
-{% set version = "7.3" %}
-{% set sha256 = "5081aedf8bb40aac1a8ad95adac9e44e148a882686ded614adf46bb67fd67574" %}
+{% set version = "8.5" %}
+{% set sha256 = "704c275439856c0d1287469f0d589a7d808d48b754a93d9ce5415d4eaf06d576" %}
 
 package:
   name: {{ name }}
@@ -10,19 +10,24 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:                # [osx and arm64]
-    - fix_ffi_fcfc.patch  # [osx and arm64]
+  patches:  # [osx]
+    - fix_for_conda_build.diff  # [osx]
 
 build:
-  number: 1
-  skip: true  # # [not osx or py2k or (arm64 and py < 38)]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  number: 0
+  skip: true  # [not osx or py<36 or (arm64 and py < 38)]
+  script: 
+    # force pyobjc to use conda-forge's chosen SDK
+    - export CFLAGS="${CFLAGS} -isysroot ${SDKROOT:-$CONDA_BUILD_SYSROOT}"
+    # force ignoring invalid compiler flag (-Wl,-export-dynamic)
+    - export CFLAGS="${CFLAGS} -Wno-unused-command-line-argument"  # [py == 37 or py == 38]
+    - {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
-    - python
+    - {{ compiler('c') }}
     - libffi
-    - patch     # [osx and arm64]
+    - patch     # [osx]
   host:
     - python
     - pip
