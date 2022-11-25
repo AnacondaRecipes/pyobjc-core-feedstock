@@ -15,12 +15,12 @@ source:
 
 build:
   number: 0
-  skip: true  # [not osx or py<36 or (arm64 and py < 38)]
+  skip: true  # [not osx or py<37 or (arm64 and py<38)]
   script: 
     # force pyobjc to use conda-forge's chosen SDK
     - export CFLAGS="${CFLAGS} -isysroot ${SDKROOT:-$CONDA_BUILD_SYSROOT}"
     # force ignoring invalid compiler flag (-Wl,-export-dynamic)
-    - export CFLAGS="${CFLAGS} -Wno-unused-command-line-argument"  # [py == 37 or py == 38]
+    - export CFLAGS="${CFLAGS} -Wno-unused-command-line-argument"  # [py==37 or py==38]
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
@@ -33,10 +33,10 @@ requirements:
     - pip
     - wheel
     - setuptools
-    - libffi
+    - libffi 3.4
   run:
     - python
-    - libffi
+    - libffi >=3.4,<3.5
 
 test:
   imports:
@@ -51,6 +51,12 @@ about:
   home: https://github.com/ronaldoussoren/pyobjc
   license: MIT
   summary: 'Python<->ObjC Interoperability Module'
+  description: |
+    The PyObjC package provides the glue needed to interface the Python interpreter
+    with the Objective-C language. At its core is the `objc` module makes
+    Objective-C objects and classes available as first-class Python citizens. It is
+    not only possible to use Objective-C objects but you can also subclass
+    Objective-C classes.
   license_family: MIT
   license_file: License.txt
   dev_url: https://github.com/ronaldoussoren/pyobjc/tree/master/pyobjc-core
