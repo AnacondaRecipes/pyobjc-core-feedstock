@@ -11,7 +11,7 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-  # Needs to prevent an error "code will never be executed" 
+  # Required to prevent an error "code will never be executed" 
   # in Modules/objc/class-builder.m:1999:17
     - fix_for_conda_build.diff
 
