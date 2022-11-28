@@ -10,8 +10,8 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - fix_for_conda_build.diff
+  #patches:
+  #  - fix_for_conda_build.diff
 
 build:
   number: 0
@@ -27,7 +27,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - libffi
-    - patch
+    #- patch
   host:
     - python
     - pip
