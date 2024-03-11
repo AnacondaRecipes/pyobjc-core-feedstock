@@ -1,6 +1,6 @@
 {% set name = "pyobjc-core" %}
-{% set version = "9.0" %}
-{% set sha256 = "3e7010c648eb94b16dd37a55f7719ed3bef6559edf4cf8fd741f46869dc223b1" %}
+{% set version = "10.1" %}
+{% set sha256 = "1844f1c8e282839e6fdcb9a9722396c1c12fb1e9331eb68828a26f28a3b2b2b1" %}
 
 package:
   name: {{ name }}
@@ -16,19 +16,18 @@ source:
     - fix_for_conda_build.diff
 
 build:
-  number: 1
-  skip: true  # [not osx or py<37 or (arm64 and py<38)]
+  number: 0
+  skip: true  # [not osx or py<38]
   script: 
     # force pyobjc to use conda-forge's chosen SDK
     - export CFLAGS="${CFLAGS} -isysroot ${SDKROOT:-$CONDA_BUILD_SYSROOT}"
     # force ignoring invalid compiler flag (-Wl,-export-dynamic)
-    - export CFLAGS="${CFLAGS} -Wno-unused-command-line-argument"  # [py==37 or py==38]
-    - {{ PYTHON }} -m pip install . --no-deps -vv
+    - export CFLAGS="${CFLAGS} -Wno-unused-command-line-argument"  # [py==38]
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - libffi
     - patch
   host:
     - python
