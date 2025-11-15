@@ -1,6 +1,6 @@
 {% set name = "pyobjc-core" %}
-{% set version = "10.1" %}
-{% set sha256 = "1844f1c8e282839e6fdcb9a9722396c1c12fb1e9331eb68828a26f28a3b2b2b1" %}
+{% set version = "12.1" %}
+{% set sha256 = "2bb3903f5387f72422145e1466b3ac3f7f0ef2e9960afa9bcd8961c5cbf8bd21" %}
 
 package:
   name: {{ name }}
@@ -8,17 +8,17 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pyobjc-core/pyobjc_core-12.1.tar.gz
   sha256: {{ sha256 }}
   patches:
-  # Required to prevent an error "code will never be executed" 
-  # in Modules/objc/class-builder.m:1999:17
+  # Required to prevent an error "code will never be executed"
+  <conda_recipe_manager.types.SentinelType object at 0x7f9f41f60440>:  # in Modules/objc/class-builder.m:1999:17
     - fix_for_conda_build.diff
 
 build:
   number: 0
   skip: true  # [not osx or py<38]
-  script: 
+  script:
     # force pyobjc to use conda-forge's chosen SDK
     - export CFLAGS="${CFLAGS} -isysroot ${SDKROOT:-$CONDA_BUILD_SYSROOT}"
     # force ignoring invalid compiler flag (-Wl,-export-dynamic)
@@ -51,7 +51,7 @@ test:
 about:
   home: https://github.com/ronaldoussoren/pyobjc
   license: MIT
-  summary: 'Python<->ObjC Interoperability Module'
+  summary: Python<->ObjC Interoperability Module
   description: |
     The PyObjC package provides the glue needed to interface the Python interpreter
     with the Objective-C language. At its core is the `objc` module makes
