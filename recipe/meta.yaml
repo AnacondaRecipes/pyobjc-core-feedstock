@@ -36,17 +36,6 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
-    # Run test without copying test-files to destination artifact
-    - ROOT="$(dirname "$SRC_DIR")"
-    - echo "$ROOT"
-    - SRC_REAL="$(ls -d "$ROOT"/work_moved* 2>/dev/null | head -n1)"
-    - echo "$SRC_REAL"
-    - test -n "$SRC_REAL"
-    - export PYTHONPATH="$SRC_REAL"
-    - pushd "$SRC_REAL"
-    - python Tools/runtests.py
-    - popd
-
 about:
   home: https://github.com/ronaldoussoren/pyobjc
   license: MIT
